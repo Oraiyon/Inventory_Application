@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <a href="/catalog">Catalog</a>
+        <a href="/catalog/categories">Categories</a>
+        <a href="/catalog/items">Items</a>
+      </div>
+      <div>
+        <h1><%= title %></h1>
+        <form action="" method="post">
+          <label for="name">Name: </label>
+          <input 
+          type="text" 
+          name="name" 
+          id="name" 
+          placeholder="iPhone 15 Pro Max" 
+          required
+          value=<%= item === undefined ? "" : item.name %> >
+          <label for="description">Description: </label>
+          <textarea 
+          name="description" 
+          id="description" 
+          cols="30" 
+          rows="10"
+          required
+          placeholder="Tech specs..."><%= item === undefined ? "" : item.description %></textarea>
+          <label for="category">Category: </label>
+          <select 
+          name="category" 
+          id="category"
+          required>
+          <option value="">--Select a category--</option>
+            <% categories.forEach(category => { %>
+              <% if (item === "" || item.category.toString() !== category._id.toString()) { %>
+                <option value=<%= category._id %>><%= category.name %></option>
+              <% } else { %>
+                <option value=<%= category._id %> selected><%= category.name %></option>
+              <% } %>
+            <% }) %>
+          </select>
+          <div>
+            <label for="in_stock">In Stock: </label>
+            <input 
+            type="number"
+            name="in_stock"
+            id="in_stock"
+            required
+            value=<%= item === undefined ? "" : item.in_stock %>>
+          </div>
+          <button>Submit</button>
+        </form>
+        <% if (errors) { %>
+          <% errors.forEach(err => { %>
+            <p><%= err.msg %></p>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

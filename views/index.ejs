@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <a href="/catalog">Catalog</a>
+        <a href="/catalog/categories">Categories</a>
+        <a href="/catalog/items">Items</a>
+      </div>
+      <div>
+        <h1><%= title %></h1>
+        <p>Categories: <%= categories.length ? categories.length : "0" %></p>
+        <p>Items: <%= items.length ? items.length : "0" %></p>
+      </div>
+    </div>
+  </body>
+</html>

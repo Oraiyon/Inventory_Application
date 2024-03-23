@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <a href="/catalog">Catalog</a>
+        <a href="/catalog/categories">Categories</a>
+        <a href="/catalog/items">Items</a>
+      </div>
+      <div>
+        <h1><%= title %></h1>
+        <% if (categories.length) { %>
+          <% categories.forEach(category => { %>
+            <a href=<%= category.url %>>
+              <%= category.name %>
+            </a>
+            <p><%= category.description %></p>
+          <% }) %>
+        <% } else { %>
+          <p>No categories.</p>
+        <% } %>
+        <a href="/catalog/category/create">Create category</a>
+      </div>
+    </div>
+  </body>
+</html>
