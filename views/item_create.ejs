@@ -15,7 +15,7 @@
       </div>
       <div>
         <h1><%= title %></h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           <label for="name">Name: </label>
           <input 
           type="text" 
@@ -54,6 +54,13 @@
             id="in_stock"
             required
             value=<%= item === "" ? "" : item.in_stock %>>
+          </div>
+          <div>
+            <label for="item_img">Item Image: </label>
+            <input 
+            type="file"
+            name="item_img"
+            id="item_img">
           </div>
           <button>Submit</button>
         </form>
