@@ -16,6 +16,11 @@
       <div>
         <h1><%= category.name %></h1>
         <p>Description: <%= category.description %></p>
+        <% items.forEach(item => { %>
+          <% if (item.category.name === category.name) { %>
+           <a href=<%= item.url %>><%= item.name %></a>
+          <% } %>
+        <% }) %>
         <a href=<%= category.url+"/delete"%>>Delete</a>
         <a href=<%= category.url+"/update"%>>Update</a>
       </div>

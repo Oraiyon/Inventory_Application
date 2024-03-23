@@ -6,6 +6,7 @@
 
 .container {
   display: flex;
+  gap: 16px;
 }
 
 .container > div {

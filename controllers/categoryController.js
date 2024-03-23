@@ -59,10 +59,14 @@ exports.category_create_post = [
 
 // Get category details
 exports.category_details_get = asyncHandler(async (req, res, next) => {
-  const category = await Category.findById(req.params.id).exec();
+  const [category, allItems] = await Promise.all([
+    Category.findById(req.params.id).exec(),
+    Item.find().populate("category").exec()
+  ]);
   res.render("category_details", {
     title: "Category Details",
-    category: category
+    category: category,
+    items: allItems
   });
 });
 
