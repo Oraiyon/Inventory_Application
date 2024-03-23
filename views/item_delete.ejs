@@ -14,17 +14,14 @@
         <a href="/catalog/items">Items</a>
       </div>
       <div>
-        <h1><%= title %></h1>
-        <% if (categories.length) { %>
-          <% categories.forEach(category => { %>
-            <a href=<%= category.url %>>
-              <%= category.name %>
-            </a>
-          <% }) %>
-        <% } else { %>
-          <p>No categories.</p>
-        <% } %>
-        <a href="/catalog/category/create">Create category</a>
+        <h1>Delete <%= item.name %></h1>
+        <form action="" method="post">
+          <input 
+          type="hidden"
+          name="item_id"
+          value=<%= item._id %>>
+          <button>Delete</button>
+        </form>
       </div>
     </div>
   </body>

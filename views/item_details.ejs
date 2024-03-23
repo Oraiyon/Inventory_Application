@@ -14,17 +14,12 @@
         <a href="/catalog/items">Items</a>
       </div>
       <div>
-        <h1><%= title %></h1>
-        <% if (categories.length) { %>
-          <% categories.forEach(category => { %>
-            <a href=<%= category.url %>>
-              <%= category.name %>
-            </a>
-          <% }) %>
-        <% } else { %>
-          <p>No categories.</p>
-        <% } %>
-        <a href="/catalog/category/create">Create category</a>
+        <h1><%= item.name %></h1>
+        <p>Description: <%= item.description %></p>
+        <p>Category: <%= item.category.name %></p>
+        <p>In Stock: <%= item.in_stock %></p>
+        <a href=<%= item.url+"/delete" %>>Delete</a>
+        <a href=<%= item.url+"/update" %>>Update</a>
       </div>
     </div>
   </body>
