@@ -23,7 +23,7 @@
           id="name" 
           placeholder="iPhone 15 Pro Max" 
           required
-          value=<%= item === undefined ? "" : item.name %> >
+          value=<%= item === "" ? "" : item.name %> >
           <label for="description">Description: </label>
           <textarea 
           name="description" 
@@ -31,7 +31,7 @@
           cols="30" 
           rows="10"
           required
-          placeholder="Tech specs..."><%= item === undefined ? "" : item.description %></textarea>
+          placeholder="Tech specs..."><%= item === "" ? "" : item.description %></textarea>
           <label for="category">Category: </label>
           <select 
           name="category" 
@@ -53,7 +53,7 @@
             name="in_stock"
             id="in_stock"
             required
-            value=<%= item === undefined ? "" : item.in_stock %>>
+            value=<%= item === "" ? "" : item.in_stock %>>
           </div>
           <button>Submit</button>
         </form>

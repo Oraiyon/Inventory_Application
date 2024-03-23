@@ -23,7 +23,7 @@
           id="name" 
           required 
           placeholder="Laptops"
-          value=<%= category === undefined ? "" : category.name %>>
+          value=<%= category === "" ? "" : category.name %>>
           <label for="description">Description: </label>
           <textarea 
           name="description" 
@@ -31,7 +31,7 @@
           cols="30" 
           rows="10"
           placeholder="Summary">
-          <%= category === undefined ? "" : category.description %>
+          <%= category === "" ? "" : category.description %>
           </textarea>
           <button>Submit</button>
         </form>
