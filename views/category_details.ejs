@@ -21,8 +21,10 @@
            <a href=<%= item.url %>><%= item.name %></a>
           <% } %>
         <% }) %>
-        <a href=<%= category.url+"/delete"%>>Delete</a>
-        <a href=<%= category.url+"/update"%>>Update</a>
+        <div class="horizontal">
+          <a href=<%= category.url+"/delete"%>>Delete</a>
+          <a href=<%= category.url+"/update"%>>Update</a>
+        </div>
       </div>
     </div>
   </body>

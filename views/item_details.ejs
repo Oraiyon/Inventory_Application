@@ -22,8 +22,10 @@
           <% } %>
         <% }) %>
         <p>In Stock: <%= item.in_stock %></p>
-        <a href=<%= item.url+"/delete" %>>Delete</a>
-        <a href=<%= item.url+"/update" %>>Update</a>
+        <div class="horizontal">
+          <a href=<%= item.url+"/delete" %>>Delete</a>
+          <a href=<%= item.url+"/update" %>>Update</a>
+        </div>
       </div>
     </div>
   </body>

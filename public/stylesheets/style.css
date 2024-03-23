@@ -22,3 +22,8 @@ form {
 form > div {
   display: flex;
 }
+
+.horizontal {
+  display: flex;
+  gap: 4px;
+}
