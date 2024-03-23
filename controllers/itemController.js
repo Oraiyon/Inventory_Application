@@ -51,10 +51,14 @@ exports.item_create_post = [
 ];
 
 exports.item_details_get = asyncHandler(async (req, res, next) => {
-  const item = await Item.findById(req.params.id).populate("category").exec();
+  const [item, allCategories] = await Promise.all([
+    Item.findById(req.params.id).populate("category").exec(),
+    Category.find().exec()
+  ]);
   res.render("item_details", {
     title: "Item Details",
-    item: item
+    item: item,
+    categories: allCategories
   });
 });
 
