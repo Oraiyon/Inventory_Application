@@ -22,6 +22,7 @@
           <% } %>
         <% }) %>
         <p>In Stock: <%= item.in_stock %></p>
+        <img src=<%= item.img_url %> alt=<%= item.description %>>
         <div class="horizontal">
           <a href=<%= item.url+"/delete" %>>Delete</a>
           <a href=<%= item.url+"/update" %>>Update</a>

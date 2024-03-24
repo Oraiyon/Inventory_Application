@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
-  name: { type: String, required: true, maxLength: 20 },
-  description: { type: String, required: true, maxLength: 50 },
+  name: { type: String, required: true, maxLength: 50 },
+  description: { type: String, required: true, maxLength: 100 },
   category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
-  in_stock: { type: Number, required: true }
+  in_stock: { type: Number, required: true },
+  img_url: { type: String, required: false }
 });
 
 ItemSchema.virtual("url").get(function () {
