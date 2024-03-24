@@ -19,7 +19,7 @@ dotenv.config();
 mongoose.set("strictQuery", false);
 const main = async () => {
   try {
-    // Change to Railway url when deploying
+    // Railway URI
     await mongoose.connect(process.env.MONGODB_URI);
   } catch (err) {
     console.log(err);
