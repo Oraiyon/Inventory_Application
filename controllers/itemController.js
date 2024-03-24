@@ -5,6 +5,17 @@ const { body, validationResult } = require("express-validator");
 const multer = require("multer");
 // dest starts from root
 const upload = multer({ dest: "./public/uploads/" });
+const cloudinary = require("cloudinary").v2;
+// For .env
+const dotenv = require("dotenv");
+dotenv.config();
+
+cloudinary.config({
+  // Change to Railway
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 exports.item_list = asyncHandler(async (req, res, next) => {
   const allItems = await Item.find().populate("category").exec();
@@ -25,20 +36,21 @@ exports.item_create_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.item_create_post = [
-  // upload goes first
+  // Upload goes first
   upload.single("item_img"),
   body("name", "Name must be specified").trim().isLength({ min: 1 }).escape(),
   body("description", "Description must be specified").trim().isLength({ min: 1 }).escape(),
   body("category", "No category selected").isLength({ min: 1 }).escape(),
   body("in_stock").escape(),
+  body("item_img").escape(),
   asyncHandler(async (req, res, next) => {
-    console.log(req.file);
     const errors = validationResult(req);
     const item = new Item({
       name: req.body.name,
       description: req.body.description,
       category: req.body.category,
-      in_stock: req.body.in_stock
+      in_stock: req.body.in_stock,
+      img_url: ""
     });
     if (!errors.isEmpty()) {
       const allCategories = await Category.find().exec();
@@ -50,6 +62,9 @@ exports.item_create_post = [
       });
       return;
     } else {
+      // Uploading to cloudinary
+      const item_img = await cloudinary.uploader.upload(req.file.path);
+      item.img_url = item_img.secure_url;
       await item.save();
       res.redirect(item.url);
     }
@@ -95,10 +110,12 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.item_update_post = [
+  upload.single("item_img"),
   body("name", "Name must be specified").trim().isLength({ min: 1 }).escape(),
   body("description", "Description must be specified").trim().isLength({ min: 1 }).escape(),
   body("category", "No category selected").isLength({ min: 1 }).escape(),
   body("in_stock").escape(),
+  body("item_img").optional({ values: "falsy" }),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     const item = await Item.findById(req.params.id).exec();
@@ -112,10 +129,12 @@ exports.item_update_post = [
       });
       return;
     } else {
+      const item_img = await cloudinary.uploader.upload(req.file.path);
       item.name = req.body.name;
       item.description = req.body.description;
       item.category = req.body.category;
       item.in_stock = req.body.in_stock;
+      item.img_url = item_img.secure_url;
       await item.save();
       res.redirect(item.url);
     }
