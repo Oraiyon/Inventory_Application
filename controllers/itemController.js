@@ -115,7 +115,7 @@ exports.item_update_post = [
   body("description", "Description must be specified").trim().isLength({ min: 1 }).escape(),
   body("category", "No category selected").isLength({ min: 1 }).escape(),
   body("in_stock").escape(),
-  body("item_img").optional({ values: "falsy" }),
+  body("item_img").escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     const item = await Item.findById(req.params.id).exec();
