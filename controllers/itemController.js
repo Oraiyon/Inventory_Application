@@ -18,7 +18,7 @@ cloudinary.config({
 });
 
 exports.item_list = asyncHandler(async (req, res, next) => {
-  const allItems = await Item.find().populate("category").exec();
+  const allItems = await Item.find().populate("category").sort({ name: 1 }).exec();
   res.render("item_list", {
     title: "All Items",
     items: allItems
