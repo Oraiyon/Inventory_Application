@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const compression = require("compression");
+const helmet = require("helmet");
 
 const indexRouter = require("./routes/index");
 const catalogRouter = require("./routes/catalog");
@@ -18,7 +20,7 @@ mongoose.set("strictQuery", false);
 const main = async () => {
   try {
     // Change to Railway url when deploying
-    await mongoose.connect(process.env.URL);
+    await mongoose.connect(process.env.MONGODB_URI);
   } catch (err) {
     console.log(err);
   }
@@ -28,6 +30,10 @@ main();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+// Security
+app.use(compression());
+app.use(helmet());
 
 app.use(logger("dev"));
 app.use(express.json());
